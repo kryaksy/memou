@@ -4,16 +4,16 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-	var currentIndex = array.length,
-		temporaryValue,
-		randomIndex;
+	var i = array.length,
+		temp,
+		j;
 
-	while (currentIndex !== 0) {
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
+	while (i !== 0) {
+		j = Math.floor(Math.random() * i);
+		i -= 1;
+		temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
 	}
 
 	return array;
