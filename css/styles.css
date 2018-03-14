@@ -62,7 +62,8 @@ h1 {
 }
 
 .cards .card.open {
-  transform: rotateY(0);
+  transform: rotateY(180deg);
+  transition: transform 1s;
   background: #02b3e4;
   cursor: default;
 }

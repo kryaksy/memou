@@ -29,65 +29,73 @@ function shuffle(array) {
   return array;
 }
 
-function displayCard() {
+function showCard(a) {
   // display the card's symbol
+  a.classList.add('open');
 }
 
 function addCard() {
   //add the card to a *list* of "open" cards
+  console.log('addCard');
+  if (true /*list has two card*/ ) {
+    checkCards();
+  }
+
 }
 
 function lockCards() {
   // function to lock the cards in the open position
+  console.log('lockCards');
 }
 
 function hideCards() {
   // function to remove the cards from the list and hide the card's symbol
+  console.log('hideCards');
 }
 
 function incrementMoveCount() {
   // function to increment the move counter and display it on the page
+  console.log('incrementMoveCount');
 }
 
 function endGame() {
   // function to display a message with the final score
+  console.log('endGame');
 }
 
-function checkCard() {
-  if (true /*the list already has another card*/ ) {
+function checkCards(A, B) {
+  // check to see if the two cards match
+  if (A === B) {
 
-    // check to see if the two cards match
-    if (true /*match*/ ) {
+    lockCards();
 
-      lockCards();
+  } else {
 
-    }
+    hideCards();
+    incrementMoveCount();
 
-    if (true /*not match*/ ) {
+  }
 
-      hideCards();
-      incrementMoveCount();
+}
 
-    }
+function checkIfEnd() {
+  if (false /*all open*/ ) {
 
-    if (true /*all matched*/ ) {
+    endGame();
 
-      endGame();
-
-    }
   }
 }
 
 
 //LISTENERS
 // TODO: set up the event listener for a card.
-document.querySelector('.cards').addEventListener('click', function() {
+document.querySelector('.cards').addEventListener('click', function(e) {
 
-  displayCard(e.target);
+  showCard(e.target);
 
-  addCard(e.target)
+  addCard();
 
-  checkCard(e.target);
+  checkIfEnd();
 
 });
 
