@@ -1,8 +1,9 @@
 /* Create a list that holds all of your cards */
-var cards = document.getElementsByClassName('card');
+var card = document.getElementsByClassName('card');
+var cards = document.querySelector('.cards');
 
 /* Converting HTML Collection to an array*/
-var cardsArray = Array.prototype.slice.call(cards);
+var cardsArray = Array.prototype.slice.call(card);
 
 /* TODO: Display the cards on the page
 - shuffle the list of cards
@@ -53,23 +54,23 @@ function endGame() {
 }
 
 function checkCard() {
-  if ( /*the list already has another card*/ ) {
+  if (true /*the list already has another card*/ ) {
 
     // check to see if the two cards match
-    if ( /*match*/ ) {
+    if (true /*match*/ ) {
 
       lockCards();
 
     }
 
-    if ( /*not match*/ ) {
+    if (true /*not match*/ ) {
 
       hideCards();
       incrementMoveCount();
 
     }
 
-    if ( /*all matched*/ ) {
+    if (true /*all matched*/ ) {
 
       endGame();
 
@@ -80,7 +81,7 @@ function checkCard() {
 
 //LISTENERS
 // TODO: set up the event listener for a card.
-cards.addEventListener('click', function() {
+document.querySelector('.cards').addEventListener('click', function() {
 
   displayCard(e.target);
 
