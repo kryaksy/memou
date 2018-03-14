@@ -25,11 +25,6 @@ function shuffle(array) {
   return array;
 }
 
-// Shuffle Test Starts
-// var testArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-// console.log(shuffle(testArray));
-// Shuffle Test Ends
-
 function displayCard() {
   // display the card's symbol
 }
@@ -79,6 +74,8 @@ function checkCard() {
   }
 }
 
+
+//LISTENERS
 // TODO: set up the event listener for a card.
 cards.addEventListener('click', function() {
 
@@ -89,3 +86,10 @@ cards.addEventListener('click', function() {
   checkCard(e.target);
 
 });
+
+
+//TESTS
+// Shuffle Test Starts
+// var testArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+// console.log(shuffle(testArray));
+// Shuffle Test Ends
