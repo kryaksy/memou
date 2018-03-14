@@ -10,19 +10,19 @@ var cardsArray = Array.prototype.slice.call(cards);
 // FUNCTIONS
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-	var i = array.length,
-		temp,
-		j;
+  var i = array.length,
+    temp,
+    j;
 
-	while (i !== 0) {
-		j = Math.floor(Math.random() * i);
-		i -= 1;
-		temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
-	}
+  while (i !== 0) {
+    j = Math.floor(Math.random() * i);
+    i -= 1;
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
 
-	return array;
+  return array;
 }
 
 // Shuffle Test Starts
@@ -31,45 +31,61 @@ function shuffle(array) {
 // Shuffle Test Ends
 
 function displayCard() {
-	// display the card's symbol
+  // display the card's symbol
 }
 
 function addCard() {
-	//add the card to a *list* of "open" cards
+  //add the card to a *list* of "open" cards
+}
+
+function lockCards() {
+  // function to lock the cards in the open position
+}
+
+function hideCards() {
+  // function to remove the cards from the list and hide the card's symbol
+}
+
+function incrementMoveCount() {
+  // function to increment the move counter and display it on the page
+}
+
+function endGame() {
+  // function to display a message with the final score
 }
 
 function checkCard() {
-	if ( /*the list already has another card*/ ) {
+  if ( /*the list already has another card*/ ) {
 
-		// check to see if the two cards match
-		if ( /*match*/ ) {
+    // check to see if the two cards match
+    if ( /*match*/ ) {
 
-			// function to lock the cards in the open position
+      lockCards();
 
-		}
+    }
 
-		if ( /*not match*/ ) {
+    if ( /*not match*/ ) {
 
-			// function to remove the cards from the list and hide the card's symbol
-			// function to increment the move counter and display it on the page
+      hideCards();
+      incrementMoveCount();
 
-		}
+    }
 
-		if ( /*all matched*/ ) {
+    if ( /*all matched*/ ) {
 
-			// function to display a message with the final score
+      endGame();
 
-		}
-	}
+    }
+  }
 }
 
 // TODO: set up the event listener for a card.
 cards.addEventListener('click', function() {
 
-	displayCard(e.target); // display the card's symbol
+  displayCard(e.target);
 
-	addCard(e.target) // - add the card to a *list* of "open" cards
+  addCard(e.target)
 
-	checkCard(e.target); // check and manipulate the v
+  checkCard(e.target);
 
 });
