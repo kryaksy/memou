@@ -35,6 +35,7 @@ function shuffle(array) {
 function showCard(a) {
 	// display the card's symbol
 	a.classList.add('open');
+	a.classList.add('show');
 }
 
 function addCard() {
