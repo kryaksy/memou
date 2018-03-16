@@ -77,7 +77,8 @@ h1 {
 
 .cards .card.open {
 	transform: rotateY(180deg);
-	transition: transform 1s;
+	/* TODO: Play with transitions */
+	transition: transform .3s ease-in;
 	cursor: default;
 }
 
