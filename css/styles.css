@@ -78,13 +78,12 @@ h1 {
 .cards .card.open {
 	transform: rotateY(180deg);
 	/* TODO: Play with transitions */
-	transition: transform .3s ease-in;
+	transition: all .3s ease-in;
 	cursor: default;
-}
-
-.cards .card.show {
 	font-size: 33px;
 }
+
+.cards .card.show {}
 
 .cards .card.match {
 	background: #02ccba;

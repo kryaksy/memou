@@ -35,15 +35,18 @@ function shuffle(array) {
 function showCard(a) {
 	// display the card's symbol
 	a.classList.add('open');
-	a.classList.add('show');
 }
 
-function addCard() {
+function addCard(a) {
 	//add the card to a *list* of "open" cards
-	console.log('addCard');
-	if (true /*list has two card*/ ) {
-		checkCards();
+	tempList.push(a);
+	if (tempList.length >= 2) {
+		checkCards(tempList);
+		tempList = [];
+	} else {
+		hideCards(a);
 	}
+	console.log(tempList);
 
 }
 
@@ -52,9 +55,9 @@ function lockCards() {
 	console.log('lockCards');
 }
 
-function hideCards() {
+function hideCards(a) {
 	// function to remove the cards from the list and hide the card's symbol
-	console.log('hideCards');
+	a.classList.remove('open');
 }
 
 function incrementMoveCount() {
@@ -67,16 +70,18 @@ function endGame() {
 	console.log('endGame');
 }
 
-function checkCards(A, B) {
+function checkCards(Array) {
 	// check to see if the two cards match
-	if (A === B) {
+	if (Array[0] === Array[1]) {
 
 		lockCards();
+		console.log('true');
 
 	} else {
 
-		hideCards();
+		hideCards(a);
 		incrementMoveCount();
+		console.log('false');
 
 	}
 
@@ -93,12 +98,11 @@ function checkIfEnd() {
 
 //LISTENERS
 // TODO: set up the event listener for a card.
+let tempList = [];
 document.querySelector('.cards').addEventListener('click', function(e) {
 
 	showCard(e.target);
-
-	addCard();
-
+	addCard(e.target);
 	checkIfEnd();
 
 });
