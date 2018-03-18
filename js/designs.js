@@ -2,114 +2,96 @@
 var card = document.getElementsByClassName('card');
 var cards = document.querySelector('.cards');
 
-/* Converting HTML Collection to an array*/
-var cardsArray = Array.prototype.slice.call(card);
+const startTime = performance.now();
+var compareCards = [];
+var moveCount = 0;
+var matchedCards = 0;
 
-/* Font Awesome LISTENERS*/
-var faItems = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
+let faItems = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb', 'fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
-/* TODO: Display the cards on the page
-- shuffle the list of cards
-- loop through each card and create its HTML
-- add each card's HTML to the page */
-
+startGame();
 
 // FUNCTIONS
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-	var i = array.length,
+// deleteCards()
+function deleteCards() {
+	document.querySelector('.cards').innerHTML = '';
+}
+
+// Shuffle function
+function shuffle(a) {
+	var i = a.length,
 		temp,
 		j;
 
 	while (i !== 0) {
 		j = Math.floor(Math.random() * i);
 		i -= 1;
-		temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
+		temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
 	}
 
-	return array;
+	return this;
 }
 
-function showCard(a) {
-	// display the card's symbol
-	a.classList.add('open');
-}
+// startGame() function
+function startGame() {
+	deleteCards();
+	shuffle(faItems);
 
-function addCard(a) {
-	//add the card to a *list* of "open" cards
-	tempList.push(a);
-	if (tempList.length >= 2) {
-		checkCards(tempList);
-		tempList = [];
-	} else {
-		hideCards(a);
-	}
-	console.log(tempList);
-
-}
-
-function lockCards() {
-	// function to lock the cards in the open position
-	console.log('lockCards');
-}
-
-function hideCards(a) {
-	// function to remove the cards from the list and hide the card's symbol
-	a.classList.remove('open');
-}
-
-function incrementMoveCount() {
-	// function to increment the move counter and display it on the page
-	console.log('incrementMoveCount');
-}
-
-function endGame() {
-	// function to display a message with the final score
-	console.log('endGame');
-}
-
-function checkCards(Array) {
-	// check to see if the two cards match
-	if (Array[0] === Array[1]) {
-
-		lockCards();
-		console.log('true');
-
-	} else {
-
-		hideCards(a);
-		incrementMoveCount();
-		console.log('false');
-
+	for (var i = 0; i < faItems.length; i++) {
+		var newCard = document.createElement('container');
+		var back = document.createElement('div');
+		newCard.classList.add('card');
+		back.classList.add('back', 'fa', faItems[i]);
+		newCard.id = i + 1;
+		newCard.append(back);
+		document.querySelector('.cards').append(newCard);
 	}
 
 }
-
-function checkIfEnd() {
-	if (false /*all open*/ ) {
-
-		endGame();
-
-	}
-}
-
 
 //LISTENERS
-// TODO: set up the event listener for a card.
-let tempList = [];
 document.querySelector('.cards').addEventListener('click', function(e) {
 
-	showCard(e.target);
-	addCard(e.target);
-	checkIfEnd();
+	if (e.target !== document.querySelector('.cards') &&
+		!(e.target.classList.contains('match')) &&
+		!(e.target.classList.contains('open'))) {
+
+		e.target.classList.add('open');
+		compareCards.push(e.target.id);
+
+		if (compareCards.length == 2) {
+
+			let firstCard = document.getElementById(compareCards[0]);
+			let secondCard = document.getElementById(compareCards[1]);
+			if (firstCard.querySelector('.back').classList[2] == secondCard.querySelector('.back').classList[2]) {
+				setTimeout(function() {
+					firstCard.classList.add('match');
+					secondCard.classList.add('match');
+					firstCard.classList.remove('open');
+					secondCard.classList.remove('open');
+				}, 500)
+				matchedCards++;
+				if (matchedCards === 8) {
+					const endTime = performance.now();
+					alert('You win!\n' + Math.floor(1000000 / ((endTime - startTime) * moveCount / 1000)) + ' puan');
+				}
+			} else {
+				moveCount++;
+				const firstCardToClose = document.getElementById(compareCards[0]);
+				const secondCardToClose = document.getElementById(compareCards[1]);
+				setTimeout(function() {
+					firstCardToClose.classList.remove('open');
+					secondCardToClose.classList.remove('open');
+				}, 500)
+			}
+			compareCards = [];
+		}
+	}
 
 });
 
-
-//TESTS
-// Shuffle Test Starts
-// var testArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-// console.log(shuffle(testArray));
-// Shuffle Test Ends
+document.querySelector('.restart').addEventListener('click', function() {
+	startGame();
+});
