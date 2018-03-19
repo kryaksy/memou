@@ -12,12 +12,10 @@ let faItems = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cub
 startGame();
 
 // FUNCTIONS
-// deleteCards()
 function deleteCards() {
 	document.querySelector('.cards').innerHTML = '';
 }
 
-// Shuffle function
 function shuffle(a) {
 	var i = a.length,
 		temp,
@@ -31,10 +29,9 @@ function shuffle(a) {
 		a[j] = temp;
 	}
 
-	return this;
+	return a;
 }
 
-// startGame() function
 function startGame() {
 	deleteCards();
 	shuffle(faItems);
@@ -48,7 +45,6 @@ function startGame() {
 		newCard.append(back);
 		document.querySelector('.cards').append(newCard);
 	}
-
 }
 
 //LISTENERS
@@ -74,8 +70,9 @@ document.querySelector('.cards').addEventListener('click', function(e) {
 				}, 500)
 				matchedCards++;
 				if (matchedCards === 8) {
+					document.querySelector('.restart').style.right = '0px';
 					const endTime = performance.now();
-					alert('You win!\n' + Math.floor(1000000 / ((endTime - startTime) * moveCount / 1000)) + ' puan');
+					document.querySelector('#point').innerHTML = Math.floor(1000000 / ((endTime - startTime) * moveCount / 1000));
 				}
 			} else {
 				moveCount++;
@@ -89,9 +86,30 @@ document.querySelector('.cards').addEventListener('click', function(e) {
 			compareCards = [];
 		}
 	}
-
 });
 
-document.querySelector('.restart').addEventListener('click', function() {
+document.querySelector('#startButton').addEventListener('click', function(e) {
+	document.querySelector('.restart').style.right = '-200px';
+	compareCards = [];
+	moveCount = 0;
+	matchedCards = 0;
 	startGame();
+	document.querySelector('.container').style.display = 'flex';
+	document.querySelector('header').style.height = '15vh';
+	document.querySelector('header').style.color = 'white';
+	document.querySelector('header').style.flexDirection = 'row';
+	document.querySelector('h1').style.fontSize = '2.5em';
+});
+
+document.querySelector('#startButton2').addEventListener('click', function(e) {
+	e.target.style.display = 'none';
+	compareCards = [];
+	moveCount = 0;
+	matchedCards = 0;
+	startGame();
+	document.querySelector('.container').style.display = 'flex';
+	document.querySelector('header').style.height = '15vh';
+	document.querySelector('header').style.color = 'white';
+	document.querySelector('header').style.flexDirection = 'row';
+	document.querySelector('h1').style.fontSize = '2.5em';
 });

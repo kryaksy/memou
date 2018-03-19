@@ -3,34 +3,32 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Memou</title>
+		<title>Memory Game</title>
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
 	</head>
 
 	<body>
-		<div class="container">
 
-			<header>
-				<h1>Memou</h1>
-			</header>
-
-			<section class="score">
-				<ul class="stars">
-					<li><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-				</ul>
-				<span class="moves">3</span> Moves
-				<div class="restart">
-					<i class="fa fa-repeat"></i>
-				</div>
-			</section>
-
-			<container class="cards"></container>
-
+		<div class="restart">
+			<div class="score">
+				<p>score</p>
+				<p id="point">0</p>
+			</div>
+			<button type="button" id="startButton">Start New Game</button>
 		</div>
+
+		<header>
+			<h1>Memory Game</h1>
+			<button type="button" id="startButton2">Start New Game</button>
+			<!-- <h4>Score: <span id="point">0</span></h4> -->
+		</header>
+
+		<div class="container">
+			<container class="cards"></container>
+		</div>
+
 		<script src="js/designs.js"></script>
 	</body>
 
