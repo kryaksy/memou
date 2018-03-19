@@ -6,6 +6,7 @@ html {
 	box-sizing: inherit;
 	margin: 0;
 	padding: 0;
+	transition: all .3s ease-out;
 }
 
 html, body {
@@ -13,11 +14,11 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: #00235D;
 }
 
 body {
 	font-family: sans-serif;
+	background-color: #aaa;
 }
 
 .container {
@@ -25,26 +26,34 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	margin-top: 40px;
+}
+
+#board {
+	position: absolute;
+	display: none;
+	width: 200px;
+	right: 0px;
 }
 
 header {
-	padding: 40px;
 	color: white;
 	display: flex;
 	flex-wrap: nowrap;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	background: #00235D;
-	transition: all 1s ease;
+	background-color: black;
 }
 
 h1 {
+	position: absolute;
 	font-family: 'Amatic SC', sans-serif;
-	font-size: 3em;
-	transition: all 1s ease;
+	font-size: 4em;
+	line-height: 6.5em;
+	text-transform: uppercase;
+	cursor: default;
 }
 
 button {
@@ -54,7 +63,6 @@ button {
 	background-color: #005D08;
 	color: white;
 	font-size: .8em;
-	margin: 10px;
 }
 
 /*
@@ -74,16 +82,15 @@ button {
 .cards .card {
 	height: 125px;
 	width: 125px;
-	background: white;
-	color: #fff;
 	border-radius: 90%;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	transform-style: preserve-3d;
-	transition: all .5s ease;
 	font-size: 2em;
+	background: #333;
+	backface-visibility: hidden;
 }
 
 .cards .card .back {
@@ -96,12 +103,13 @@ button {
 	overflow: hidden;
 	transform: rotateY(180deg);
 	backface-visibility: hidden;
-	background: #FF3819;
+	/* background: #26267F; */
+	background: white;
+	color: black;
 }
 
 .cards .card.match {
-	transform: rotateY(180deg);
-	color: white;
+	transform: rotateY(-180deg);
 }
 
 .cards .card.open {
@@ -111,10 +119,8 @@ button {
 }
 
 .cards .card.match .back {
-	border-radius: 0px;
-	color: #7EA908;
-	transition: all .5s ease-in;
-	background-color: #00235D;
+	background-color: green;
+	color: black;
 }
 
 /*
@@ -122,23 +128,35 @@ button {
  */
 
 .restart {
+	position: relative;
+	top: 15em;
 	display: flex;
-	background-color: black;
 	color: white;
-	width: 200px;
-	height: 100vh;
-	position: absolute;
-	right: -200px;
 	flex-direction: column;
-	flex-wrap: wrap;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	text-transform: uppercase;
-	padding: 30px 0;
-	transition: all .5s ease-in;
+	padding: 10px;
+	margin-top: 20px;
+	left: 0px;
 }
 
 #point {
+	display: flex;
+	align-items: center;
+	font-size: 5em;
 	color: green;
-	transition: all .4s ease;
+}
+
+.notification {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #333;
+	background-color: #aaa;
+	padding: 3px;
+}
+
+.notification span {
+	text-transform: uppercase;
 }

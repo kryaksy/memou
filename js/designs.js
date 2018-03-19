@@ -37,7 +37,7 @@ function startGame() {
 	shuffle(faItems);
 
 	for (var i = 0; i < faItems.length; i++) {
-		var newCard = document.createElement('container');
+		var newCard = document.createElement('div');
 		var back = document.createElement('div');
 		newCard.classList.add('card');
 		back.classList.add('back', 'fa', faItems[i]);
@@ -45,6 +45,11 @@ function startGame() {
 		newCard.append(back);
 		document.querySelector('.cards').append(newCard);
 	}
+}
+
+function isEven(n) {
+	n = Number(n);
+	return n === 0 || !!(n && !(n % 2));
 }
 
 //LISTENERS
@@ -62,18 +67,31 @@ document.querySelector('.cards').addEventListener('click', function(e) {
 			let firstCard = document.getElementById(compareCards[0]);
 			let secondCard = document.getElementById(compareCards[1]);
 			if (firstCard.querySelector('.back').classList[2] == secondCard.querySelector('.back').classList[2]) {
+
 				setTimeout(function() {
 					firstCard.classList.add('match');
 					secondCard.classList.add('match');
 					firstCard.classList.remove('open');
 					secondCard.classList.remove('open');
 				}, 500)
+
 				matchedCards++;
 				if (matchedCards === 8) {
-					document.querySelector('.restart').style.right = '0px';
 					const endTime = performance.now();
 					document.querySelector('#point').innerHTML = Math.floor(1000000 / ((endTime - startTime) * moveCount / 1000));
+					setTimeout(function() {
+						document.querySelector('header').style.color = '#aaa';
+						document.querySelector('header').style.height = '50vh';
+						document.querySelector('h1').style.lineHeight = '5em';
+						document.querySelector('h1').style.fontSize = '4em';
+						document.querySelector('button').style.marginTop = '120px';
+					}, 100)
+					setTimeout(function() {
+						document.querySelector('.restart').style.top = '0px';
+						document.querySelector('.restart').style.opacity = '100';
+					}, 200)
 				}
+
 			} else {
 				moveCount++;
 				const firstCardToClose = document.getElementById(compareCards[0]);
@@ -89,27 +107,48 @@ document.querySelector('.cards').addEventListener('click', function(e) {
 });
 
 document.querySelector('#startButton').addEventListener('click', function(e) {
-	document.querySelector('.restart').style.right = '-200px';
-	compareCards = [];
-	moveCount = 0;
-	matchedCards = 0;
-	startGame();
-	document.querySelector('.container').style.display = 'flex';
-	document.querySelector('header').style.height = '15vh';
-	document.querySelector('header').style.color = 'white';
-	document.querySelector('header').style.flexDirection = 'row';
-	document.querySelector('h1').style.fontSize = '2.5em';
-});
 
-document.querySelector('#startButton2').addEventListener('click', function(e) {
-	e.target.style.display = 'none';
+	let pressEnter = 1;
 	compareCards = [];
 	moveCount = 0;
 	matchedCards = 0;
 	startGame();
 	document.querySelector('.container').style.display = 'flex';
-	document.querySelector('header').style.height = '15vh';
-	document.querySelector('header').style.color = 'white';
-	document.querySelector('header').style.flexDirection = 'row';
-	document.querySelector('h1').style.fontSize = '2.5em';
+	document.querySelector('header').style.height = '0vh';
+	document.querySelector('header').style.color = '#aaa';
+	document.querySelector('h1').style.fontSize = '8em';
+	document.querySelector('h1').style.lineHeight = '0em';
+	document.querySelector('.restart').style.top = '-200px';
+	window.addEventListener('keypress', function(e) {
+		pressEnter++;
+		var key = e.which || e.keyCode;
+		if (key === 13) { // 13 is enter
+
+			if (isEven(pressEnter)) {
+				setTimeout(function() {
+					document.querySelector('header').style.color = '#aaa';
+					document.querySelector('header').style.height = '50vh';
+					document.querySelector('h1').style.lineHeight = '5em';
+					document.querySelector('h1').style.fontSize = '4em';
+					document.querySelector('button').style.marginTop = '120px';
+				}, 100)
+				setTimeout(function() {
+					document.querySelector('.restart').style.top = '0px';
+					document.querySelector('.restart').style.opacity = '100';
+				}, 200)
+			} else {
+				setTimeout(function() {
+					document.querySelector('header').style.color = '#aaa';
+					document.querySelector('header').style.height = '0vh';
+					document.querySelector('h1').style.lineHeight = '0em';
+					document.querySelector('h1').style.fontSize = '8em';
+					document.querySelector('button').style.marginTop = '0px';
+				}, 200)
+				setTimeout(function() {
+					document.querySelector('.restart').style.top = '-200px';
+				}, 100)
+			}
+
+		}
+	});
 });
