@@ -3,6 +3,8 @@ const title = document.querySelector('h1');
 const restart = document.querySelector('.restart');
 const button = document.querySelector('button');
 const point = document.querySelector('#point');
+const notification = document.querySelector('.notification')
+var pressEnter = 1;
 
 /* Create a list that holds all of your cards */
 const card = document.getElementsByClassName('card');
@@ -83,6 +85,7 @@ cards.addEventListener('click', function(e) {
 
 				matchedCards++;
 				if (matchedCards === 8) {
+					pressEnter = 1;
 					const endTime = performance.now();
 					point.innerHTML = Math.floor(1000000 / ((endTime - startTime) * moveCount / 1000));
 					setTimeout(function() {
@@ -96,6 +99,7 @@ cards.addEventListener('click', function(e) {
 						restart.style.top = '0px';
 						restart.style.opacity = '100';
 					}, 200)
+					matchedCards = 0;
 				}
 
 			} else {
@@ -113,8 +117,6 @@ cards.addEventListener('click', function(e) {
 });
 
 document.querySelector('#startButton').addEventListener('click', function(e) {
-
-	let pressEnter = 1;
 	compareCards = [];
 	moveCount = 0;
 	matchedCards = 0;
@@ -124,36 +126,46 @@ document.querySelector('#startButton').addEventListener('click', function(e) {
 	header.style.color = 'white';
 	title.style.fontSize = '8em';
 	title.style.lineHeight = '0em';
-	restart.style.top = '-200px';
-	window.addEventListener('keypress', function(e) {
-		pressEnter++;
-		var key = e.which || e.keyCode;
-		if (key === 13) { // 13 is enter
+	restart.style.top = '-300px';
+	pressEnter = 2;
+});
 
-			if (isEven(pressEnter)) {
-				setTimeout(function() {
-					header.style.color = '#aaa';
-					header.style.height = '45vh';
-					title.style.lineHeight = '5em';
-					title.style.fontSize = '4em';
-					button.style.marginTop = '80px';
-				}, 100)
-				setTimeout(function() {
-					restart.style.top = '0px';
-					restart.style.opacity = '100';
-				}, 200)
-			} else {
-				setTimeout(function() {
-					header.style.color = 'white';
-					header.style.height = '0vh';
-					title.style.lineHeight = '0em';
-					title.style.fontSize = '7em';
-				}, 200)
-				setTimeout(function() {
-					restart.style.top = '-300px';
-				}, 100)
+window.addEventListener('keypress', function(e) {
+	var key = e.which || e.keyCode;
+	if (key === 13) { // 13 is enter
+
+		if (isEven(pressEnter)) {
+			setTimeout(function() {
+				header.style.color = '#aaa';
+				header.style.height = '45vh';
+				title.style.lineHeight = '5em';
+				title.style.fontSize = '4em';
+				button.style.marginTop = '80px';
+				notification.style.color = '#ccc'
+			}, 100)
+			setTimeout(function() {
+				restart.style.top = '0px';
+				restart.style.opacity = '100';
+			}, 200)
+		} else {
+			if (pressEnter === 1) {
+				startGame();
+				document.querySelector('.container').style.display = 'flex';
 			}
-
+			setTimeout(function() {
+				header.style.height = '0vh';
+				header.style.color = 'white';
+				title.style.fontSize = '4em';
+				title.style.lineHeight = '0em';
+			}, 200)
+			setTimeout(function() {
+				restart.style.top = '-300px';
+			}, 100)
+			setTimeout(function() {
+				notification.style.color = 'green'
+			}, 300)
 		}
-	});
+		pressEnter++;
+
+	}
 });

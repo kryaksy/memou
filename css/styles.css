@@ -150,11 +150,11 @@ button {
 
 .notification {
 	position: absolute;
-	top: 18px;
-	right: 20px;
+	right: 18px;
 	color: white;
-	background-color: #aaa;
-	padding: 3px;
+	padding: 5px;
+	font-family: monospace;
+	font-size: 1.3em;
 }
 
 .notification span {
