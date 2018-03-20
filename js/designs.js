@@ -121,7 +121,7 @@ document.querySelector('#startButton').addEventListener('click', function(e) {
 	startGame();
 	document.querySelector('.container').style.display = 'flex';
 	header.style.height = '0vh';
-	header.style.color = '#aaa';
+	header.style.color = 'white';
 	title.style.fontSize = '8em';
 	title.style.lineHeight = '0em';
 	restart.style.top = '-200px';
@@ -133,7 +133,7 @@ document.querySelector('#startButton').addEventListener('click', function(e) {
 			if (isEven(pressEnter)) {
 				setTimeout(function() {
 					header.style.color = '#aaa';
-					header.style.height = '50vh';
+					header.style.height = '45vh';
 					title.style.lineHeight = '5em';
 					title.style.fontSize = '4em';
 					button.style.marginTop = '80px';
@@ -144,13 +144,13 @@ document.querySelector('#startButton').addEventListener('click', function(e) {
 				}, 200)
 			} else {
 				setTimeout(function() {
-					header.style.color = '#aaa';
+					header.style.color = 'white';
 					header.style.height = '0vh';
 					title.style.lineHeight = '0em';
-					title.style.fontSize = '8em';
+					title.style.fontSize = '7em';
 				}, 200)
 				setTimeout(function() {
-					restart.style.top = '-200px';
+					restart.style.top = '-300px';
 				}, 100)
 			}
 
