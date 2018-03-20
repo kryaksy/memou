@@ -6,7 +6,7 @@ html {
 	box-sizing: inherit;
 	margin: 0;
 	padding: 0;
-	transition: all .3s ease-out;
+	transition: all .3s ease;
 }
 
 html, body {
@@ -89,7 +89,7 @@ button {
 	align-items: center;
 	transform-style: preserve-3d;
 	font-size: 2em;
-	background: #333;
+	background-color: #333;
 	backface-visibility: hidden;
 }
 

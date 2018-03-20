@@ -4,16 +4,14 @@ const restart = document.querySelector('.restart');
 const button = document.querySelector('button');
 const point = document.querySelector('#point');
 const notification = document.querySelector('.notification')
-var pressEnter = 1;
-
-/* Create a list that holds all of your cards */
-const card = document.getElementsByClassName('card');
 const cards = document.querySelector('.cards');
 
 const startTime = performance.now();
+
 var compareCards = [];
 var moveCount = 0;
 var matchedCards = 0;
+var pressEnter = 1;
 
 let faItems = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb', 'fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
@@ -37,7 +35,7 @@ function shuffle(a) {
 		a[j] = temp;
 	}
 
-	return a;
+	return this;
 }
 
 function startGame() {
@@ -117,17 +115,20 @@ cards.addEventListener('click', function(e) {
 });
 
 document.querySelector('#startButton').addEventListener('click', function(e) {
-	compareCards = [];
-	moveCount = 0;
-	matchedCards = 0;
-	startGame();
-	document.querySelector('.container').style.display = 'flex';
-	header.style.height = '0vh';
-	header.style.color = 'white';
-	title.style.fontSize = '8em';
-	title.style.lineHeight = '0em';
-	restart.style.top = '-300px';
-	pressEnter = 2;
+	var key = e.which || e.keyCode;
+	if (key !== 13) { // 13 is enter
+		compareCards = [];
+		moveCount = 0;
+		matchedCards = 0;
+		startGame();
+		document.querySelector('.container').style.display = 'flex';
+		header.style.height = '0vh';
+		header.style.color = 'black';
+		title.style.fontSize = '4em';
+		title.style.lineHeight = '0em';
+		restart.style.top = '-300px';
+		pressEnter = 2;
+	}
 });
 
 window.addEventListener('keypress', function(e) {
@@ -154,7 +155,7 @@ window.addEventListener('keypress', function(e) {
 			}
 			setTimeout(function() {
 				header.style.height = '0vh';
-				header.style.color = 'white';
+				header.style.color = 'black';
 				title.style.fontSize = '4em';
 				title.style.lineHeight = '0em';
 			}, 200)
@@ -166,6 +167,5 @@ window.addEventListener('keypress', function(e) {
 			}, 300)
 		}
 		pressEnter++;
-
 	}
 });
